@@ -1,21 +1,18 @@
 {
-  "name": "typescript-agent-framework",
-  "version": "0.1.0",
-  "private": true,
-  "type": "module",
-  "workspaces": [
-    "packages/*"
-  ],
-  "scripts": {
-    "build": "yarn workspaces run build",
-    "test": "yarn workspaces run test",
-    "changeset": "changeset",
-    "version": "changeset version",
-    "publish": "changeset publish"
-  },
-  "devDependencies": {
-    "@changesets/cli": "^2.29.2",
-    "@modelcontextprotocol/sdk": "^1.10.2"
-  },
-  "packageManager": "pnpm@10.12.4+sha512.5ea8b0deed94ed68691c9bad4c955492705c5eeb8a87ef86bc62c74a26b037b08ff9570f108b2e4dbd1dd1a9186fea925e527f141c648e85af45631074680184"
+	"name": "typescript-agent-framework",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "pnpm run -r build",
+		"test": "pnpm run -r test",
+		"changeset": "changeset",
+		"version": "changeset version",
+		"publish": "changeset publish"
+	},
+	"devDependencies": {
+		"@changesets/cli": "^2.29.2",
+		"@modelcontextprotocol/sdk": "^1.10.2"
+	},
+	"packageManager": "pnpm@10.14.0"
 }
