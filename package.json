@@ -14,5 +14,5 @@
 		"@changesets/cli": "^2.29.2",
 		"@modelcontextprotocol/sdk": "^1.10.2"
 	},
-	"packageManager": "pnpm@10.14.0"
+	"packageManager": "pnpm@10.12.4"
 }
