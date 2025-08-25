@@ -1,4 +1,8 @@
-import { WorkflowEntrypoint, WorkflowStep, WorkflowEvent } from 'cloudflare:workers';
+import {
+  WorkflowEntrypoint,
+  WorkflowStep,
+  WorkflowEvent,
+} from "cloudflare:workers";
 
 export interface Env {}
 
@@ -9,24 +13,32 @@ export type ExpenseParams = {
   description: string;
 };
 
-export class ExpenseApprovalWorkflow extends WorkflowEntrypoint<Env, ExpenseParams> {
+export class ExpenseApprovalWorkflow extends WorkflowEntrypoint<
+  Env,
+  ExpenseParams
+> {
   async run(event: WorkflowEvent<ExpenseParams>, step: WorkflowStep) {
     // Mark as submitted
-    await step.do('Mark as submitted', async () => {
+    await step.do("Mark as submitted", async () => {
       // In a real app, update status in D1/KV here
-      console.log(`Expense ${event.payload.expenseId} submitted by ${event.payload.user}`);
+      console.log(
+        `Expense ${event.payload.expenseId} submitted by ${event.payload.user}`
+      );
     });
 
     // Wait for approval/rejection event
-    const action = await step.waitForEvent('approval_action');
-    if (action.payload === 'approve') {
-      await step.do('Mark as approved', async () => {
+    const action = await step.waitForEvent("approval_action", {
+      type: "string",
+      timeout: "1 hour",
+    });
+    if (action.payload === "approve") {
+      await step.do("Mark as approved", async () => {
         console.log(`Expense ${event.payload.expenseId} approved`);
       });
     } else {
-      await step.do('Mark as rejected', async () => {
+      await step.do("Mark as rejected", async () => {
         console.log(`Expense ${event.payload.expenseId} rejected`);
       });
     }
   }
-} 
+}
