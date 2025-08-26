@@ -3,6 +3,8 @@ import { ExpenseRepository } from './repository';
 import { setupServerTools } from './tools';
 import { setupServerResources } from './resources';
 import { Hono } from 'hono';
+// @ts-ignore - For build compatibility
+type HonoType = any;
 */
 
 import { Implementation } from '@modelcontextprotocol/sdk/types.js';
@@ -49,7 +51,7 @@ export class ExpenseMcpServer extends McpHonoServerDO {
 
     // Create and set up tools and resources with our repository
     // Pass the environment to enable workflow access
-    setupServerTools(server, repository, this.env);
+    setupServerTools(server, repository, this.env as any);
     setupServerResources(server, repository);
   }
 
@@ -95,12 +97,12 @@ export class ExpenseMcpServer extends McpHonoServerDO {
     return super.processMcpRequest(request);
   }
 
-  protected setupRoutes(app: Hono<{ Bindings: any }>): void {
+  protected setupRoutes(app: any): void {
     // Call the parent implementation to setup SSE and other MCP routes
     super.setupRoutes(app);
     
     // Handle root path - process SSE requests directly
-    app.get('/', (c) => {
+    app.get('/', (c: any) => {
       const acceptHeader = c.req.header('Accept');
       if (acceptHeader && acceptHeader.includes('text/event-stream')) {
         // This is an SSE request from the MCP Inspector

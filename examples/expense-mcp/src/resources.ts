@@ -9,6 +9,6 @@ export const ExpenseResource = {
   }
 };
 
-export function setupServerResources(server, repository) {
+export function setupServerResources(server: any, repository: any) {
   // No resources defined for expense-mcp yet.
 } 
