@@ -1,0 +1,46 @@
+{
+	"name": "browser-mcp-server-v2",
+	"main": "src/index.ts",
+	"account_id": "59084df56e21d828dcbd5811f81c7754",
+	"compatibility_date": "2025-02-11",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	"browser": {
+		"binding": "MYBROWSER"
+	},
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "BROWSER_MCP_SERVER",
+				"class_name": "BrowserMcpServer"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"BrowserMcpServer"
+			]
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "browser-mcp-db-raydp102",
+			"database_id": "00d13a52-a4b2-478b-835a-3d71c22e9bcb"
+		}
+	],
+	"vars": {
+		"MAX_CONCURRENT_SESSIONS": "5",
+		"SESSION_TIMEOUT_MS": "300000",
+		"CACHE_TTL_HOURS": "24",
+		"MAX_PAGE_SIZE_MB": "10",
+		"BROWSER_MODE": "cloudflare_puppeteer"
+	}
+}
